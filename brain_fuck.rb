@@ -15,7 +15,7 @@ def brain_luck(code, input)
         j = stack.pop
         insts << j
       else insts << ch
-     end
+    end
   end
   ptr = 0
   ip = 0
