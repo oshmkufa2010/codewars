@@ -4,24 +4,24 @@ def justify(text, width)
   words = text.split(' ')
   lines = []
   i = 0
-  while true do
+  while true
     line = []
     line_len = 0
-    while i < words.size and line_len < width do
+    while i < words.size and line_len < width
       word = words[i]
-      if word.size + line_len > width then
+      if word.size + line_len > width
         break
       end
       line_len += (word.size + 1)
-      line << word 
+      line << word
       i += 1
     end
-    if i >= words.size then
+    if i >= words.size
       lines << line.join(" ")
       break
     end
     gap_count = line.size - 1
-    line_size = line.map { | w | w.size }.reduce(0,  &:+)
+    line_size = line.map { |w| w.size }.reduce(0,  &:+)
     diff = width - line_size
     avag = diff / gap_count
     res = diff % gap_count
@@ -36,7 +36,7 @@ def justify2(text, width)
   formated = text.split.reduce([[]]) do |lines, word|
     line = lines.last
     line_size = line.reduce(0){|sum, w|sum + w.size} + line.size - 1
-    if line_size + word.size + 1 <= width then
+    if line_size + word.size + 1 <= width
       line << word
       lines
     else
@@ -47,19 +47,19 @@ def justify2(text, width)
   head = formated[0...-1].map do |line|
     line_size = line.reduce(0){|sum, w| sum + w.size } + line.size - 1
     gap_size = line.size - 1
-      if gap_size > 0 then 
-        diff = width - line_size
-        avg = diff / gap_size
-        res = diff % gap_size 
-        gaps = Array.new(gap_size, " " * (avg+1))
-        gaps = gaps[0...res].map{|sp| sp + " "} + gaps[res..-1]
-        line.zip(gaps).flatten.compact.join("")
-      else
-        line[0]
-      end
+    if gap_size > 0
+      diff = width - line_size
+      avg = diff / gap_size
+      res = diff % gap_size
+      gaps = Array.new(gap_size, " " * (avg+1))
+      gaps = gaps[0...res].map{|sp| sp + " "} + gaps[res..-1]
+      line.zip(gaps).flatten.compact.join("")
+    else
+      line[0]
+    end
   end
   head << formated[-1].join(" ")
-  head.join("\n") 
+  head.join("\n")
 end
 
 s = "Lorem  ipsum  dolor  sit amet,

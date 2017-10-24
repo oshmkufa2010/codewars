@@ -1,12 +1,18 @@
+require 'test/unit'
+
 class GenericEntity
 	def initialize(kwargs)
-    eigen = class << self; self; end
+ 		eigen = class << self; self; end
     kwargs.each do |k, v|
-      eigen.class_eval {  attr_accessor k }
-      instance_variable_set "@#{k}", v
-    end
-  end
-end 
+    	eigen.class_eval {  attr_accessor k }
+    	instance_variable_set "@#{k}", v
+    end 
+	end
+end
 
-g = GenericEntity.new(:aaa=>1, :bbb=>2)
-puts g.aaa
+class TestGenericEntity < Test::Unit::TestCase
+  def test_simple
+    car = GenericEntity.new(:color => "black", :engine => "V8")
+    assert_equal(car.color, "black")
+  end
+end

@@ -1,5 +1,6 @@
 import types
 from functools import reduce
+import unittest
 
 def create_number_class(alphabet):
     base = len(alphabet)
@@ -45,11 +46,28 @@ def create_number_class(alphabet):
     cls.__module__ = __name__
     return cls
 
+class TestCreateNumberClass(unittest.TestCase):
+    def setUp(self):
+        self.BinClass = create_number_class('01')
+        self.HexClass = create_number_class('0123456789ABCDEF')
+        self.x = self.HexClass('9B')
+        self.y = self.HexClass('AC')
+    
+    def test_add(self):
+        BinClass = self.BinClass
+        HexClass = self.HexClass
+        x = HexClass('9B')
+        y = HexClass('AC')
+        self.assertEqual(str(x+y), "147")
+    
+    def test_convert_to(self):
+        BinClass = self.BinClass
+        HexClass = self.HexClass
+        x = HexClass('9B')
+        self.assertEqual(x.convert_to(BinClass), "10011011")
 
-BinClass = create_number_class('01')
-HexClass = create_number_class('0123456789ABCDEF')
-x = HexClass('')
-y = HexClass('AA')
-print(x)
-print(x+y)
-print(x-y)
+
+
+
+if __name__ == '__main__':
+    unittest.main()
