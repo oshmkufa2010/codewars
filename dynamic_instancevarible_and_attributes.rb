@@ -1,5 +1,5 @@
 class GenericEntity
-	def initialize(kwargs)
+  def initialize(kwargs)
     eigen = class << self; self; end
     kwargs.each do |k, v|
       eigen.class_eval {  attr_accessor k }
