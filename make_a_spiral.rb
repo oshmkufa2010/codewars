@@ -21,7 +21,7 @@ def spiralize(size)
         Array.new(s, 0)
       end
       (0..s).to_a.product((0..s).to_a).each do |i, j|
-        if 
+        # TODO
       end
     end
   end
